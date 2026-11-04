@@ -17,8 +17,10 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 import { Link } from '@tanstack/react-router'
+import { ArrowLeft } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
+import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useSystemConfig } from '@/hooks/use-system-config'
 
@@ -31,33 +33,63 @@ export function AuthLayout({ children }: AuthLayoutProps) {
   const { systemName, logo, loading } = useSystemConfig()
 
   return (
-    <div className='relative grid h-svh max-w-none'>
-      <Link
-        to='/'
-        className='absolute top-4 left-4 z-10 flex items-center gap-2 transition-opacity hover:opacity-80 sm:top-8 sm:left-8'
-      >
-        <div className='relative h-8 w-8'>
+    <div className='lulu-auth-layout'>
+      <header className='lulu-auth-header'>
+        <Link
+          to='/'
+          className='flex items-center gap-2.5 font-semibold transition-opacity hover:opacity-80'
+        >
           {loading ? (
-            <Skeleton className='absolute inset-0 rounded-full' />
+            <Skeleton className='size-9 rounded-xl' />
           ) : (
             <img
               src={logo}
               alt={t('Logo')}
-              className='h-8 w-8 rounded-full object-cover'
+              className='size-9 rounded-xl object-cover'
             />
           )}
+          {loading ? (
+            <Skeleton className='h-6 w-24' />
+          ) : (
+            <span className='text-lg'>{systemName}</span>
+          )}
+        </Link>
+        <Button
+          variant='ghost'
+          size='sm'
+          className='gap-2'
+          render={<Link to='/' />}
+        >
+          <ArrowLeft className='size-4' aria-hidden='true' />
+          {t('Back to home')}
+        </Button>
+      </header>
+
+      <main className='lulu-auth-main'>
+        <div className='lulu-auth-frame'>
+          <aside className='lulu-auth-scene'>
+            <img
+              src='/branding/lulu/lounge.png'
+              alt=''
+              className='lulu-auth-art'
+            />
+            <div className='lulu-auth-scene-copy'>
+              <span className='lulu-auth-eyebrow'>
+                {t('Welcome to Lulu API')}
+              </span>
+              <p className='lulu-auth-headline'>
+                {t('A little calm, a lot of possibility')}
+              </p>
+              <p className='lulu-auth-scene-detail'>
+                {t('One API for your ideas. Lulu is ready to create with you.')}
+              </p>
+            </div>
+          </aside>
+          <div className='lulu-auth-panel'>
+            <div className='lulu-auth-form'>{children}</div>
+          </div>
         </div>
-        {loading ? (
-          <Skeleton className='h-6 w-24' />
-        ) : (
-          <h1 className='text-xl font-medium'>{systemName}</h1>
-        )}
-      </Link>
-      <div className='container flex items-center pt-16 sm:pt-0'>
-        <div className='mx-auto flex w-full flex-col justify-center space-y-2 px-4 py-8 sm:w-[480px] sm:p-8'>
-          {children}
-        </div>
-      </div>
+      </main>
     </div>
   )
 }

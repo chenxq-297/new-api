@@ -20,7 +20,6 @@ import { Link2 } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { SectionPageLayout } from '@/components/layout/components/section-page-layout'
 import { Button } from '@/components/ui/button'
 import {
   Empty,
@@ -30,7 +29,7 @@ import {
 } from '@/components/ui/empty'
 import { Skeleton } from '@/components/ui/skeleton'
 import { TitledCard } from '@/components/ui/titled-card'
-import { useProfile } from '@/features/profile/hooks/use-profile'
+import type { UserProfile } from '@/features/profile/types'
 
 import { AccessTokensCard } from './components/access-tokens-card'
 import { AccountActionCard } from './components/account-action-card'
@@ -40,12 +39,18 @@ import { PasskeyCard } from './components/passkey-card'
 import { PrivacyCard } from './components/privacy-card'
 import { TwoFACard } from './components/two-fa-card'
 
-export function Security() {
+interface SecurityContentProps {
+  profile: UserProfile | null
+  loading: boolean
+  onProfileUpdate: () => Promise<void>
+  onRetry: () => Promise<void>
+}
+
+export function SecurityContent(props: SecurityContentProps) {
   const { t } = useTranslation()
-  const { profile, loading, refreshProfile, fetchProfile } = useProfile()
 
   let content: ReactNode
-  if (loading) {
+  if (props.loading) {
     content = (
       <div role='status' aria-label={t('Loading...')} className='space-y-4'>
         <Skeleton className='h-28 w-full' />
@@ -53,7 +58,7 @@ export function Security() {
         <Skeleton className='h-52 w-full' />
       </div>
     )
-  } else if (!profile) {
+  } else if (!props.profile) {
     content = (
       <Empty>
         <EmptyHeader>
@@ -65,7 +70,7 @@ export function Security() {
         <Button
           type='button'
           variant='outline'
-          onClick={() => void fetchProfile()}
+          onClick={() => void props.onRetry()}
         >
           {t('Retry')}
         </Button>
@@ -84,9 +89,9 @@ export function Security() {
             </h3>
             <AccountActionCard
               action='password'
-              username={profile.username}
-              hasPassword={profile.has_password}
-              onUpdate={refreshProfile}
+              username={props.profile.username}
+              hasPassword={props.profile.has_password}
+              onUpdate={props.onProfileUpdate}
             />
             <TitledCard
               title={t('Account Bindings')}
@@ -97,7 +102,10 @@ export function Security() {
               iconClassName='size-7 sm:size-7'
               disableHoverEffect
             >
-              <AccountBindings profile={profile} onUpdate={refreshProfile} />
+              <AccountBindings
+                profile={props.profile}
+                onUpdate={props.onProfileUpdate}
+              />
             </TitledCard>
           </section>
           <section aria-labelledby='security-access' className='space-y-4'>
@@ -111,7 +119,10 @@ export function Security() {
             <h3 id='security-account' className='text-sm font-semibold'>
               {t('Account Actions')}
             </h3>
-            <AccountActionCard action='delete' username={profile.username} />
+            <AccountActionCard
+              action='delete'
+              username={props.profile.username}
+            />
           </section>
         </div>
         <aside
@@ -122,28 +133,22 @@ export function Security() {
             <h3 id='security-verification' className='text-sm font-semibold'>
               {t('Security verification')}
             </h3>
-            <PasskeyCard loading={loading} />
-            <TwoFACard loading={loading} />
+            <PasskeyCard loading={props.loading} />
+            <TwoFACard loading={props.loading} />
           </div>
           <section aria-labelledby='security-privacy' className='space-y-4'>
             <h3 id='security-privacy' className='text-sm font-semibold'>
               {t('Privacy')}
             </h3>
-            <PrivacyCard profile={profile} onUpdate={refreshProfile} />
+            <PrivacyCard
+              profile={props.profile}
+              onUpdate={props.onProfileUpdate}
+            />
           </section>
         </aside>
       </div>
     )
   }
 
-  return (
-    <SectionPageLayout>
-      <SectionPageLayout.Title>
-        {t('Security & Access')}
-      </SectionPageLayout.Title>
-      <SectionPageLayout.Content>
-        <div className='mx-auto w-full max-w-7xl'>{content}</div>
-      </SectionPageLayout.Content>
-    </SectionPageLayout>
-  )
+  return content
 }

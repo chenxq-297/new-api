@@ -4639,6 +4639,7 @@
     "Perplexity": "Perplexity",
     "Persist your data file": "データファイルを永続化する",
     "Personal": "個人",
+    "Personal Center": "マイページ",
     "Personal area": "個人エリア",
     "Personal Center Area": "パーソナルセンターエリア",
     "Personal info settings": "個人情報設定",
@@ -7358,6 +7359,22 @@
     "Zhipu": "Zhipu",
     "Zhipu GLM": "Zhipu GLM",
     "Zhipu V4": "Zhipu V 4",
-    "Zoom": "ズーム"
+    "Zoom": "ズーム",
+    "Welcome to Lulu API": "Lulu API へようこそ",
+    "Give your ideas room to grow.": "ひらめきを、のびのびと。",
+    "Familiar APIs, your favorite models. Let Lulu keep you company while you create.": "使い慣れた API と、お気に入りのモデル。ルルと一緒にアイデアを形に。",
+    "One place to connect": "ひとつにつながる",
+    "Connect your favorite AI models through a unified API.": "統一された API で、よく使う AI モデルに接続。",
+    "Understand every expense": "利用料金をわかりやすく",
+    "Track usage and costs for each request in your dashboard.": "リクエストごとの使用量と料金をダッシュボードで確認。",
+    "Start at your own pace": "自分のペースで始めよう",
+    "Create an API key, choose a model, and start your next project.": "API キーを作成してモデルを選び、次の制作を始めましょう。",
+    "Features": "機能",
+    "A little calm, a lot of possibility": "ひと息つけば、可能性が広がる。",
+    "Take it easy. Let AI help with the rest.": "肩の力を抜いて。あとは AI と一緒に。",
+    "One API for your ideas. Lulu is ready to create with you.": "ひとつの API から、アイデアが広がる。ルルと今日の制作を始めましょう。",
+    "Back to home": "ホームに戻る",
+    "Sign in and pick up where you left off.": "ログインして、創作の続きを始めましょう。",
+    "Your next idea starts here.": "次のアイデアは、ここから始まります。"
   }
 }

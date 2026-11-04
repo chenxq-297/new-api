@@ -1,0 +1,306 @@
+/*
+Copyright (C) 2023-2026 QuantumNous
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+For commercial licensing, please contact support@quantumnous.com
+*/
+/* Lulu is the default palette; explicit user presets retain their own colors. */
+:root {
+  --app-header-height: 4rem;
+}
+body:not([data-theme-preset]) {
+  --background: #f8f8f2;
+  --foreground: #39412f;
+  --card: #ffffff;
+  --card-foreground: #39412f;
+  --popover: #fffef8;
+  --popover-foreground: #39412f;
+  --primary: #547044;
+  --primary-foreground: #ffffff;
+  --secondary: #f5e9c4;
+  --secondary-foreground: #66552d;
+  --muted: #eff1e7;
+  --muted-foreground: #6c765f;
+  --accent: #eaf0dc;
+  --accent-foreground: #405630;
+  --border: #dfe5d5;
+  --input: #d5ddc9;
+  --ring: #789659;
+  --chart-1: #7f9e5b;
+  --chart-2: #d2a847;
+  --chart-3: #7cabb9;
+  --chart-4: #b294b9;
+  --chart-5: #d59576;
+  --overview-accent-1: #7f9e5b;
+  --overview-accent-2: #d2a847;
+  --overview-accent-3: #7cabb9;
+  --sidebar: #fffef8;
+  --sidebar-foreground: #566348;
+  --sidebar-primary: #547044;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eaf0dc;
+  --sidebar-accent-foreground: #405630;
+  --sidebar-border: #e0e5d6;
+  --sidebar-ring: #789659;
+}
+body:not([data-theme-preset]):not([data-theme-radius]) {
+  --radius: 0.65rem;
+}
+.dark body:not([data-theme-preset]) {
+  --background: #20261f;
+  --foreground: #e7ebdf;
+  --card: #293126;
+  --card-foreground: #e7ebdf;
+  --popover: #293126;
+  --popover-foreground: #e7ebdf;
+  --primary: #b0c693;
+  --primary-foreground: #223019;
+  --secondary: #4a422d;
+  --secondary-foreground: #f0dba8;
+  --muted: #333e2c;
+  --muted-foreground: #afb9a3;
+  --accent: #39472e;
+  --accent-foreground: #d9e5ca;
+  --border: #424d39;
+  --input: #4a5740;
+  --ring: #b0c693;
+  --chart-1: #acc28e;
+  --chart-2: #dfbd70;
+  --chart-3: #91bfca;
+  --chart-4: #c8a9ce;
+  --chart-5: #dfaa8d;
+  --overview-accent-1: #acc28e;
+  --overview-accent-2: #dfbd70;
+  --overview-accent-3: #91bfca;
+  --sidebar: #252d22;
+  --sidebar-foreground: #c6d0ba;
+  --sidebar-primary: #b0c693;
+  --sidebar-primary-foreground: #223019;
+  --sidebar-accent: #39472e;
+  --sidebar-accent-foreground: #e0e9d5;
+  --sidebar-border: #424d39;
+  --sidebar-ring: #b0c693;
+}
+body:not([data-theme-preset]) [data-slot='card'] {
+  box-shadow: 0 4px 24px #35422605;
+  --tw-ring-color: var(--border);
+}
+body:not([data-theme-preset]) [data-slot='sidebar-inner'] {
+  border-right: 1px solid var(--sidebar-border);
+}
+body:not([data-theme-preset]) [data-sidebar='menu-button'][data-active] {
+  background: var(--sidebar-accent);
+  color: var(--sidebar-accent-foreground);
+  font-weight: 600;
+}
+body:not([data-theme-preset]) [data-slot='table-header'] {
+  background: var(--muted);
+}
+body:not([data-theme-preset]) [data-slot='sidebar-inset'] {
+  background: var(--background);
+}
+.lulu-app-header {
+  background: var(--sidebar);
+  border-bottom: 1px solid var(--border);
+}
+body:not([data-theme-preset])
+  [data-sidebar='menu-button'][data-size='default'] {
+  min-height: 2.5rem;
+  border-radius: 0.65rem;
+}
+.lulu-auth-layout {
+  min-height: 100svh;
+  background: var(--background);
+  padding: 0 2rem 2rem;
+}
+.lulu-auth-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1160px;
+  margin-inline: auto;
+  min-height: 88px;
+}
+.lulu-auth-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100svh - 120px);
+}
+.lulu-auth-frame {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+  width: 100%;
+  max-width: 1160px;
+  min-height: 680px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1.75rem;
+  background: var(--card);
+  box-shadow: 0 16px 56px #283c2a0a;
+}
+.lulu-auth-scene {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: #e8f1ec;
+  color: #314b3b;
+}
+.lulu-auth-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 54%;
+}
+.lulu-auth-scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    #eff7f1f5 0%,
+    #eff7f1d9 15%,
+    #eff7f100 45%
+  );
+  pointer-events: none;
+}
+.lulu-auth-scene-copy {
+  position: relative;
+  z-index: 1;
+  padding: 2.75rem 2.5rem;
+}
+.lulu-auth-eyebrow {
+  display: inline-block;
+  margin-bottom: 1.125rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.lulu-auth-headline {
+  max-width: 380px;
+  font-size: 2.125rem;
+  font-weight: 650;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+.lulu-auth-scene-detail {
+  max-width: 350px;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.8;
+  color: #4d6654;
+}
+.lulu-auth-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 3rem;
+}
+.lulu-auth-form {
+  width: 100%;
+  max-width: 380px;
+}
+.lulu-auth-form form input:is([data-slot='input'], [data-slot='form-control']) {
+  min-height: 48px;
+  padding-inline: 0.875rem;
+  border-radius: 0.75rem;
+  background-color: var(--background);
+}
+.lulu-auth-form form input:has(+ button[type='button']) {
+  padding-inline-end: 3rem;
+}
+.lulu-auth-form form input + button[type='button'] {
+  width: 44px;
+  height: 44px;
+  inset-inline-end: 2px;
+  border-radius: 0.625rem;
+}
+.lulu-auth-form form button[type='submit'] {
+  min-height: 48px;
+  border-radius: 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+.lulu-auth-form form [data-slot='form-label'] {
+  line-height: 1.5;
+}
+.dark .lulu-auth-scene::after {
+  background: linear-gradient(180deg, #dce9df 0%, #e1ece1d9 15%, #e1ece100 45%);
+}
+@media (max-width: 1023px) {
+  .lulu-auth-layout {
+    padding: 0 1.25rem 2rem;
+  }
+  .lulu-auth-header {
+    max-width: 520px;
+    min-height: 76px;
+  }
+  .lulu-auth-main {
+    min-height: 0;
+  }
+  .lulu-auth-frame {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 520px;
+    min-height: 0;
+    border-radius: 1.25rem;
+  }
+  .lulu-auth-scene {
+    height: 160px;
+  }
+  .lulu-auth-art {
+    width: 55%;
+    left: auto;
+    object-position: 50% 53%;
+  }
+  .lulu-auth-scene::after,
+  .dark .lulu-auth-scene::after {
+    background: linear-gradient(90deg, #e8f1ec 0%, #e8f1ec 38%, #e8f1ec00 75%);
+  }
+  .lulu-auth-scene-copy {
+    padding: 1.5rem;
+  }
+  .lulu-auth-eyebrow {
+    margin-bottom: 0.625rem;
+    font-size: 0.75rem;
+  }
+  .lulu-auth-headline {
+    width: 53%;
+    font-size: 1.375rem;
+  }
+  .lulu-auth-scene-detail {
+    display: none;
+  }
+  .lulu-auth-panel {
+    padding: 2rem;
+  }
+}
+@media (max-width: 479px) {
+  .lulu-auth-layout {
+    padding-inline: 1rem;
+  }
+  .lulu-auth-scene {
+    height: 144px;
+  }
+  .lulu-auth-panel {
+    padding: 1.75rem 1.25rem;
+  }
+  .lulu-auth-form h2 {
+    font-size: 1.5rem;
+  }
+}

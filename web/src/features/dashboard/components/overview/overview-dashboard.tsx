@@ -86,8 +86,7 @@ const SETUP_GUIDE_CODE_PATTERN = [
 
 type DashboardActionPath =
   | '/keys'
-  | '/wallet'
-  | '/playground'
+  | '/profile'
   | '/channels'
   | '/usage-logs'
   | '/pricing'
@@ -96,6 +95,7 @@ interface StartStep {
   title: string
   description: string
   to: DashboardActionPath
+  hash?: string
   icon: LucideIcon
   completed: boolean
 }
@@ -251,6 +251,7 @@ function StartStepItem(props: {
 
       <Link
         to={props.step.to}
+        hash={props.step.hash}
         className='bg-background/70 hover:bg-muted/50 focus-visible:ring-ring flex min-w-0 flex-1 items-center justify-between gap-3 rounded-xl border px-3 py-2.5 text-left shadow-xs transition-colors outline-none focus-visible:ring-2'
       >
         <span className='flex min-w-0 items-start gap-2.5'>
@@ -516,15 +517,16 @@ export function OverviewDashboard() {
       {
         title: t('Add credits'),
         description: t('Keep enough balance before production traffic'),
-        to: '/wallet',
+        to: '/profile',
+        hash: 'wallet-add-funds',
         icon: CreditCard,
         completed: remainQuota > 0 || usedQuota > 0,
       },
       {
-        title: t('Send a request'),
-        description: t('Verify routing with Playground or your client'),
-        to: '/playground',
-        icon: TerminalSquare,
+        title: t('Usage Logs'),
+        description: t('Inspect requests, errors, and billing details'),
+        to: '/usage-logs',
+        icon: FileText,
         completed: requestCount > 0,
       },
     ],
@@ -647,6 +649,33 @@ export function OverviewDashboard() {
       </SectionPageLayout.Actions>
       <SectionPageLayout.Content>
         <div className='flex flex-col gap-4'>
+          <section className='relative overflow-hidden rounded-2xl border border-[#dfe5cb] bg-[#eff0da] px-6 py-7 text-[#39412f] sm:px-8 dark:border-[#4a543b] dark:bg-[#343d2d] dark:text-[#edf2df]'>
+            <img
+              src='/branding/lulu/lounge.png'
+              alt=''
+              width={1024}
+              height={1360}
+              className='pointer-events-none absolute top-0 right-0 h-full w-2/5 [mask-image:linear-gradient(to_right,transparent,black_55%)] object-cover object-[50%_42%] opacity-70 sm:opacity-100 dark:opacity-50'
+            />
+            <div className='relative max-w-[85%] sm:max-w-[65%]'>
+              <p className='text-xs font-medium text-[#65764b] dark:text-[#c1d0a6]'>
+                {t('A little calm, a lot of possibility')}
+              </p>
+              <h2 className='mt-3 text-xl font-semibold tracking-tight sm:text-2xl'>
+                {t('Take it easy. Let AI help with the rest.')}
+              </h2>
+              <p className='mt-3 max-w-md text-sm leading-relaxed text-[#697456] dark:text-[#c2cbb3]'>
+                {t('One API for your ideas. Lulu is ready to create with you.')}
+              </p>
+              <Button
+                className='mt-5 h-9 bg-[#f5cf70] px-4 text-[#59491f] hover:bg-[#ebc05b]'
+                render={<Link to='/keys' />}
+              >
+                {t('Create API Key')}
+                <ArrowRight aria-hidden='true' />
+              </Button>
+            </div>
+          </section>
           <div id={setupGuideId} hidden={!setupGuideExpanded}>
             {setupGuideExpanded && (
               <CardStaggerContainer className='grid items-stretch gap-4 xl:grid-cols-[minmax(0,1fr)_22rem]'>

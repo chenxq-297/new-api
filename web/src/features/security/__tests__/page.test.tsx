@@ -23,6 +23,7 @@ import {
   createRoute,
   createRouter,
   RouterProvider,
+  useSearch,
 } from '@tanstack/react-router'
 import {
   cleanup,
@@ -34,12 +35,11 @@ import {
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { Profile } from '@/features/profile'
+import { PersonalCenter } from '@/features/personal-center'
 import type { UserProfile } from '@/features/profile/types'
 import { api } from '@/lib/api'
+import { Route as ProfileRoute } from '@/routes/_authenticated/profile'
 import { useAuthStore } from '@/stores/auth-store'
-
-import { Security } from '../index'
 
 const profile: UserProfile = {
   id: 1,
@@ -68,6 +68,7 @@ beforeEach(() => {
     removeItem: () => undefined,
   })
   vi.spyOn(window, 'scrollTo').mockImplementation(() => undefined)
+  Element.prototype.scrollIntoView = vi.fn()
   useAuthStore
     .getState()
     .auth.setUser({ ...profile, permissions: { sidebar_settings: false } })
@@ -82,6 +83,35 @@ beforeEach(() => {
           data: { groups: [], max_tokens: 20, default_expiry_days: 30 },
         },
       }
+    }
+    if (url === '/api/user/topup/info') {
+      return {
+        data: {
+          success: true,
+          data: { pay_methods: [], amount_options: [10], min_topup: 1 },
+        },
+      }
+    }
+    if (url === '/api/user/aff') {
+      return { data: { success: true, data: 'invite-code' } }
+    }
+    if (url === '/api/subscription/plans') {
+      return { data: { success: true, data: [] } }
+    }
+    if (url === '/api/subscription/self') {
+      return {
+        data: {
+          success: true,
+          data: {
+            subscriptions: [],
+            all_subscriptions: [],
+            billing_preference: 'wallet_only',
+          },
+        },
+      }
+    }
+    if (String(url).startsWith('/api/user/topup/self?')) {
+      return { data: { success: true, data: { items: [], total: 0 } } }
     }
     if (url === '/api/user/self') {
       return { data: { success: true, data: profile } }
@@ -102,6 +132,9 @@ beforeEach(() => {
     }
     throw new Error(`Unexpected GET ${url}`)
   })
+  vi.spyOn(api, 'post').mockResolvedValue({
+    data: { success: true, data: '10' },
+  })
 })
 
 afterEach(() => {
@@ -111,11 +144,17 @@ afterEach(() => {
   vi.restoreAllMocks()
 })
 
-async function renderPage(path = '/security') {
+function PersonalCenterRoute() {
+  const search = useSearch({ strict: false })
+  return <PersonalCenter initialShowHistory={search.show_history} />
+}
+
+async function renderPage(path = '/profile', sidebarConfig = '') {
   const client = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   })
   client.setQueryData(['status'], {
+    SidebarModulesAdmin: sidebarConfig,
     checkin_enabled: false,
     wechat_login: true,
     github_oauth: true,
@@ -132,18 +171,14 @@ async function renderPage(path = '/security') {
     ],
   })
   const root = createRootRoute()
-  const security = createRoute({
-    getParentRoute: () => root,
-    path: '/security',
-    component: Security,
-  })
   const personal = createRoute({
     getParentRoute: () => root,
     path: '/profile',
-    component: Profile,
+    validateSearch: ProfileRoute.options.validateSearch,
+    component: PersonalCenterRoute,
   })
   const router = createRouter({
-    routeTree: root.addChildren([security, personal]),
+    routeTree: root.addChildren([personal]),
     history: createMemoryHistory({ initialEntries: [path] }),
   })
   await router.load()
@@ -155,7 +190,7 @@ async function renderPage(path = '/security') {
   return { ...rendered, router }
 }
 
-describe('security page migration', () => {
+describe('personal center composition', () => {
   it('places account management on the left and verification and privacy on the right', async () => {
     await renderPage()
     const login = await screen.findByRole('region', {
@@ -166,6 +201,9 @@ describe('security page migration', () => {
         .getAllByRole('region')
         .map((region) => within(region).getAllByRole('heading')[0].textContent)
     ).toEqual([
+      'Wallet',
+      'Profile',
+      'Security & Access',
       'Login & Authentication',
       'Sessions & Access',
       'Account Actions',
@@ -243,27 +281,115 @@ describe('security page migration', () => {
     )
   })
 
-  it('Profile retains preferences and no longer mounts security controls or requests', async () => {
-    await renderPage('/profile')
-    await waitFor(() =>
-      expect(
-        screen.getByRole('button', { name: 'Save Settings' })
-      ).toBeVisible()
+  it('shows wallet, preferences and security together in one page', async () => {
+    await renderPage()
+    expect(
+      await within(screen.getByRole('region', { name: 'Profile' })).findByRole(
+        'button',
+        { name: 'Save Settings' }
+      )
+    ).toBeVisible()
+    expect(screen.getAllByRole('main')).toHaveLength(1)
+    expect(
+      screen.getByRole('heading', { name: 'Personal Center' })
+    ).toBeVisible()
+    for (const name of ['Wallet', 'Profile', 'Security & Access']) {
+      expect(screen.getByRole('region', { name })).toBeVisible()
+    }
+    expect(
+      screen.getByRole('button', { name: 'Change Password' })
+    ).toBeVisible()
+    expect(screen.getByRole('button', { name: 'Redeem' })).toBeVisible()
+    expect(
+      screen.getByRole('switch', { name: 'Record IP Address' })
+    ).toBeVisible()
+  })
+
+  it('keeps sidebar customization available when personal sections are hidden', async () => {
+    useAuthStore
+      .getState()
+      .auth.setUser({ ...profile, permissions: { sidebar_settings: true } })
+    await renderPage(
+      '/profile',
+      JSON.stringify({ personal: { enabled: false } })
+    )
+    expect(await screen.findByText('Sidebar Personal Settings')).toBeVisible()
+    expect(
+      screen.queryByRole('region', { name: 'Profile' })
+    ).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('region', { name: 'Security & Access' })
+    ).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('region', { name: 'Wallet' })
+    ).not.toBeInTheDocument()
+  })
+
+  it('payment returns still open history when the wallet section is hidden', async () => {
+    const user = userEvent.setup()
+    const { router } = await renderPage(
+      '/profile?show_history=true',
+      JSON.stringify({ personal: { enabled: true, topup: false } })
     )
     expect(
-      screen.queryByRole('button', { name: 'Change Password' })
-    ).not.toBeInTheDocument()
-    expect(screen.queryByText('Account Bindings')).not.toBeInTheDocument()
+      await screen.findByRole('dialog', { name: 'Billing History' })
+    ).toBeVisible()
     expect(
-      screen.queryByRole('switch', { name: 'Record IP Address' })
+      screen.queryByRole('region', { name: 'Wallet' })
     ).not.toBeInTheDocument()
-    expect(api.get).not.toHaveBeenCalledWith('/api/user/passkey')
-    expect(api.get).not.toHaveBeenCalledWith('/api/user/2fa/status')
-    expect(api.get).not.toHaveBeenCalledWith('/api/user/sessions')
+    await waitFor(() => expect(router.state.location.pathname).toBe('/profile'))
+    expect(router.state.location.search).toEqual({})
+    await user.keyboard('{Escape}')
+    await waitFor(() =>
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    )
+  })
+
+  it('refreshes the common balance overview after a successful redemption', async () => {
+    const user = userEvent.setup()
+    await renderPage()
+    await screen.findByRole('button', { name: 'Redeem' })
+    expect(screen.getByText('$2')).toBeVisible()
+    const selfResponse = vi.mocked(api.get).getMockImplementation()
+    if (!selfResponse) throw new Error('Missing API fixture')
+    vi.mocked(api.get).mockImplementation(async (...args) => {
+      if (args[0] === '/api/user/self') {
+        return {
+          data: {
+            success: true,
+            data: {
+              ...profile,
+              quota: 2000000,
+              display_name: 'Alice refreshed',
+            },
+          },
+        }
+      }
+      return selfResponse(...args)
+    })
+    await user.type(screen.getByLabelText('Have a Code?'), 'preview-credit')
+    await user.click(screen.getByRole('button', { name: 'Redeem' }))
+    expect(
+      await screen.findByRole('heading', { name: 'Alice refreshed' })
+    ).toBeVisible()
+    expect(screen.getByText('$4')).toBeVisible()
+    expect(screen.getByLabelText('Have a Code?')).toHaveValue('')
+    expect(
+      screen.getByRole('button', { name: 'Change Password' })
+    ).toBeVisible()
   })
 
   it('a failed profile load offers retry before exposing account actions', async () => {
-    vi.mocked(api.get).mockResolvedValueOnce({ data: { success: false } })
+    const getResponse = vi.mocked(api.get).getMockImplementation()
+    if (!getResponse) throw new Error('Missing API fixture')
+    let shouldFail = true
+    vi.mocked(api.get).mockImplementation(async (...args) => {
+      if (args[0] === '/api/user/self' && shouldFail) {
+        shouldFail = false
+        return { data: { success: false } }
+      }
+      return getResponse(...args)
+    })
     const user = userEvent.setup()
     await renderPage()
     expect(await screen.findByText('Failed to load profile')).toBeVisible()

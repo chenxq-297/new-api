@@ -16,10 +16,10 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
-import { createFileRoute } from '@tanstack/react-router'
-
-import { Security } from '@/features/security'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/security/')({
-  component: Security,
+  beforeLoad: () => {
+    throw redirect({ to: '/profile', hash: 'security', replace: true })
+  },
 })

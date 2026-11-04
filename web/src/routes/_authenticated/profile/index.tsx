@@ -17,9 +17,15 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 import { createFileRoute } from '@tanstack/react-router'
+import { z } from 'zod'
 
-import { Profile } from '@/features/profile'
+import { PersonalCenter } from '@/features/personal-center'
 
 export const Route = createFileRoute('/_authenticated/profile/')({
-  component: Profile,
+  validateSearch: z.object({ show_history: z.boolean().optional() }),
+  component: RouteComponent,
 })
+
+function RouteComponent() {
+  return <PersonalCenter initialShowHistory={Route.useSearch().show_history} />
+}

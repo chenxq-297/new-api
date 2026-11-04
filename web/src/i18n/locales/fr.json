@@ -4639,6 +4639,7 @@
     "Perplexity": "Perplexity",
     "Persist your data file": "Conserver votre fichier de données",
     "Personal": "Personnel",
+    "Personal Center": "Espace personnel",
     "Personal area": "Espace personnel",
     "Personal Center Area": "Espace personnel",
     "Personal info settings": "Paramètres d'informations personnelles",
@@ -7358,6 +7359,22 @@
     "Zhipu": "Zhipu",
     "Zhipu GLM": "Zhipu GLM",
     "Zhipu V4": "Zhipu V4",
-    "Zoom": "Zoom"
+    "Zoom": "Zoom",
+    "Welcome to Lulu API": "Bienvenue chez Lulu API",
+    "Give your ideas room to grow.": "Laissez vos idées prendre leur envol.",
+    "Familiar APIs, your favorite models. Let Lulu keep you company while you create.": "Des API familières, vos modèles préférés. Lulu vous accompagne dans vos créations.",
+    "One place to connect": "Un seul point de connexion",
+    "Connect your favorite AI models through a unified API.": "Connectez vos modèles IA préférés via une API unifiée.",
+    "Understand every expense": "Chaque dépense est claire",
+    "Track usage and costs for each request in your dashboard.": "Consultez la consommation et le coût de chaque requête dans votre tableau de bord.",
+    "Start at your own pace": "Commencez à votre rythme",
+    "Create an API key, choose a model, and start your next project.": "Créez une clé API, choisissez un modèle et lancez votre prochain projet.",
+    "Features": "Fonctionnalités",
+    "A little calm, a lot of possibility": "Un peu de calme, beaucoup de possibilités",
+    "Take it easy. Let AI help with the rest.": "Détendez-vous. L’IA vous aide pour la suite.",
+    "One API for your ideas. Lulu is ready to create with you.": "Une API pour vos idées. Lulu est prêt à créer avec vous.",
+    "Back to home": "Retour à l’accueil",
+    "Sign in and pick up where you left off.": "Connectez-vous et reprenez là où vous en étiez.",
+    "Your next idea starts here.": "Votre prochaine idée commence ici."
   }
 }

@@ -4639,6 +4639,7 @@
     "Perplexity": "Perplexity",
     "Persist your data file": "Persist your data file",
     "Personal": "Personal",
+    "Personal Center": "Personal Center",
     "Personal area": "Personal area",
     "Personal Center Area": "Personal Center Area",
     "Personal info settings": "Personal info settings",
@@ -7358,6 +7359,22 @@
     "Zhipu": "Zhipu",
     "Zhipu GLM": "Zhipu GLM",
     "Zhipu V4": "Zhipu V4",
-    "Zoom": "Zoom"
+    "Zoom": "Zoom",
+    "Welcome to Lulu API": "Welcome to Lulu API",
+    "Give your ideas room to grow.": "Give your ideas room to grow.",
+    "Familiar APIs, your favorite models. Let Lulu keep you company while you create.": "Familiar APIs, your favorite models. Let Lulu keep you company while you create.",
+    "One place to connect": "One place to connect",
+    "Connect your favorite AI models through a unified API.": "Connect your favorite AI models through a unified API.",
+    "Understand every expense": "Understand every expense",
+    "Track usage and costs for each request in your dashboard.": "Track usage and costs for each request in your dashboard.",
+    "Start at your own pace": "Start at your own pace",
+    "Create an API key, choose a model, and start your next project.": "Create an API key, choose a model, and start your next project.",
+    "Features": "Features",
+    "A little calm, a lot of possibility": "A little calm, a lot of possibility",
+    "Take it easy. Let AI help with the rest.": "Take it easy. Let AI help with the rest.",
+    "One API for your ideas. Lulu is ready to create with you.": "One API for your ideas. Lulu is ready to create with you.",
+    "Back to home": "Back to home",
+    "Sign in and pick up where you left off.": "Sign in and pick up where you left off.",
+    "Your next idea starts here.": "Your next idea starts here."
   }
 }

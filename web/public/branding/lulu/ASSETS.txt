@@ -1,0 +1,8 @@
+Local visual review assets only. Not cleared for commercial deployment.
+
+lounge.png: lulu-hd-01.png in asset-sources.json
+pool.png: lulu-hd-06.png in asset-sources.json
+Source: https://www.liblib.art/modelinfo/b0dbf3529f92486ca65cb0b803ad3279
+Creator: AIPM狂想智绘
+The source page states generated content may not be used commercially.
+Obtain suitable permission or replace these assets before production use.

@@ -103,9 +103,14 @@ test('regular users only find their own console pages in search', async () => {
   const entries = await searchEntriesFor(ROLE.USER)
 
   expect(entries).toEqual(
-    expect.arrayContaining(['API Keys', 'Usage Logs', 'Wallet', 'Profile'])
+    expect.arrayContaining(['API Keys', 'Usage Logs', 'Personal Center'])
   )
-  for (const entry of [...adminEntries, ...superAdminEntries]) {
+  for (const entry of [
+    'Playground',
+    'Chat',
+    ...adminEntries,
+    ...superAdminEntries,
+  ]) {
     expect(entries).not.toContain(entry)
   }
 })
@@ -122,9 +127,8 @@ test('admins find admin pages in search but not super admin pages', async () => 
 test('pages hidden in the sidebar settings stay out of search', async () => {
   const entries = await searchEntriesFor(
     ROLE.USER,
-    JSON.stringify({ personal: { enabled: true, topup: false } })
+    JSON.stringify({ personal: { enabled: false } })
   )
 
-  expect(entries).not.toContain('Wallet')
-  expect(entries).toContain('Profile')
+  expect(entries).not.toContain('Personal Center')
 })

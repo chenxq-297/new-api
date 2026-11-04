@@ -73,50 +73,100 @@ function sidebarFor(admin?: object, user?: object, canConfigure = true) {
   return result
 }
 
-describe('security sidebar visibility', () => {
-  it('old configurations show Security & Access immediately after Profile and keep API Keys', () => {
+describe('personal center sidebar visibility', () => {
+  it('groups personal functions into one direct link with no child menu', () => {
     const { result } = sidebarFor(
       { personal: { enabled: true, personal: true, topup: true } },
       { personal: { enabled: true, personal: true } }
     )
+    const personalItems = result.current.find(
+      (group) => group.id === 'personal'
+    )?.items
+    expect(personalItems).toHaveLength(1)
+    expect(personalItems?.[0]).toMatchObject({
+      title: 'Personal Center',
+      url: '/profile',
+    })
+    expect(personalItems?.[0].items).toBeUndefined()
     expect(
-      result.current
-        .find((group) => group.id === 'personal')
-        ?.items.map((item) => item.title)
-    ).toEqual(['Wallet', 'Profile', 'Security & Access'])
+      personalItems?.filter((item) => checkIsActive('/profile#security', item))
+    ).toHaveLength(1)
+    expect(
+      personalItems?.filter((item) =>
+        checkIsActive('/profile?show_history=true#wallet', item)
+      )
+    ).toHaveLength(1)
     expect(
       result.current
         .flatMap((group) => group.items)
         .some((item) => item.title === 'API Keys')
     ).toBe(true)
   })
+
+  it.each(['topup', 'personal', 'security'])(
+    'keeps the direct link when only %s is enabled',
+    (module) => {
+      const { result } = sidebarFor({
+        personal: {
+          enabled: true,
+          topup: false,
+          personal: false,
+          security: false,
+          [module]: true,
+        },
+      })
+      expect(
+        result.current.find((group) => group.id === 'personal')?.items
+      ).toEqual([
+        expect.objectContaining({ title: 'Personal Center', url: '/profile' }),
+      ])
+    }
+  )
+
   it.each([
-    [{ personal: { enabled: true, security: false } }, undefined],
-    [{ personal: { enabled: false } }, { personal: { security: true } }],
-    [undefined, { personal: { enabled: true, security: false } }],
+    [{ personal: { enabled: false } }, undefined],
     [undefined, { personal: { enabled: false } }],
+    [
+      {
+        personal: {
+          enabled: true,
+          topup: false,
+          personal: false,
+          security: false,
+        },
+      },
+      undefined,
+    ],
+    [
+      undefined,
+      {
+        personal: {
+          enabled: true,
+          topup: false,
+          personal: false,
+          security: false,
+        },
+      },
+    ],
   ])(
-    'admin or user disablement hides Security & Access (%j, %j)',
+    'hides the entry when every personal module is disabled (%j, %j)',
     (admin, user) => {
       const { result } = sidebarFor(admin, user)
       expect(
-        result.current
-          .flatMap((group) => group.items)
-          .some((item) => item.title === 'Security & Access')
-      ).toBe(false)
+        result.current.find((group) => group.id === 'personal')
+      ).toBeUndefined()
     }
   )
+
   it('users without sidebar configuration permission retain the admin view', () => {
     const { result } = sidebarFor(
       undefined,
-      { personal: { security: false } },
+      { personal: { enabled: false } },
       false
     )
     expect(
-      result.current
-        .flatMap((group) => group.items)
-        .some((item) => item.title === 'Security & Access')
-    ).toBe(true)
+      result.current.find((group) => group.id === 'personal')?.items[0].title
+    ).toBe('Personal Center')
   })
 })
 

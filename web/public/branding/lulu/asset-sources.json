@@ -1,0 +1,88 @@
+{
+  "page": "https://www.liblib.art/modelinfo/b0dbf3529f92486ca65cb0b803ad3279?versionUuid=53db78a8d51741e6998f7978101ec1f3",
+  "author": "AIPM狂想智绘",
+  "license_notice": "页面标明生成内容不可商用，仅供本地参考。",
+  "images": [
+    {
+      "file": "lulu-hd-01.png",
+      "url": "https://liblibai-online.liblib.cloud/community-img/443402664-4b064087a46c88843cd61904eb0fdaed29dd18cc227a3793485673cd163cbece.png",
+      "bytes": 1123498,
+      "dimensions": [
+        1024,
+        1360
+      ]
+    },
+    {
+      "file": "lulu-hd-02.png",
+      "url": "https://liblibai-online.liblib.cloud/community-img/443399173-55094783e38bf4b06533688092aaa9fd10e45622843a00167978910aeed93d65.png",
+      "bytes": 1248921,
+      "dimensions": [
+        1024,
+        1360
+      ]
+    },
+    {
+      "file": "lulu-hd-03.png",
+      "url": "https://liblibai-online.liblib.cloud/community-img/443404938-32fba307aadfa6a3ecb6c127a7523e35de8e9249634ee3a7213098f6f885c384.png",
+      "bytes": 1317969,
+      "dimensions": [
+        1024,
+        1360
+      ]
+    },
+    {
+      "file": "lulu-hd-04.png",
+      "url": "https://liblibai-online.liblib.cloud/community-img/443401698-5e60d7e1d164426828f19e04971eff9db6e13c56ceaa3081a35c730373fbb816.png",
+      "bytes": 1093183,
+      "dimensions": [
+        1024,
+        1360
+      ]
+    },
+    {
+      "file": "lulu-hd-05.png",
+      "url": "https://liblibai-online.liblib.cloud/community-img/443398556-79f640a63301c32d3f878faeaa435183805712239ce1d2c03e9d807c6f108c24.png",
+      "bytes": 1009245,
+      "dimensions": [
+        1024,
+        1360
+      ]
+    },
+    {
+      "file": "lulu-hd-06.png",
+      "url": "https://liblibai-online.liblib.cloud/community-img/443414905-218a5ea87e612ed2e77d27367f5f74db5ee15d25b940d7c416b7768ed1dff787.png",
+      "bytes": 1229398,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "lulu-hd-07.png",
+      "url": "https://liblibai-online.liblib.cloud/community-img/443413434-31739a1c50e8b476924bc5a65804bb550bd0db79a404fb658116b8a8aebbcdac.png",
+      "bytes": 881741,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "lulu-hd-08.png",
+      "url": "https://liblibai-online.liblib.cloud/community-img/443412110-c1574187dc604f7b8b500cbd4aa95c6c34b283e26c9de6cf6f32080b317c6b7d.png",
+      "bytes": 855860,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "lulu-hd-09.png",
+      "url": "https://liblibai-online.liblib.cloud/community-img/443405358-7940d1a0ac2d51bdc55069dafb7aed7763ca58e5122b2681355bf8c8dfed6c3b.png",
+      "bytes": 1197567,
+      "dimensions": [
+        1024,
+        1360
+      ]
+    }
+  ]
+}

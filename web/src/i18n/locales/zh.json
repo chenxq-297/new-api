@@ -4639,6 +4639,7 @@
     "Perplexity": "Perplexity",
     "Persist your data file": "持久化您的数据文件",
     "Personal": "个人",
+    "Personal Center": "个人中心",
     "Personal area": "个人中心",
     "Personal Center Area": "个人中心区域",
     "Personal info settings": "个人信息设置",
@@ -7358,6 +7359,22 @@
     "Zhipu": "智谱",
     "Zhipu GLM": "智谱GLM",
     "Zhipu V4": "智谱 V4",
-    "Zoom": "缩放"
+    "Zoom": "缩放",
+    "Welcome to Lulu API": "欢迎来到噜家",
+    "Give your ideas room to grow.": "让灵感自在发生。",
+    "Familiar APIs, your favorite models. Let Lulu keep you company while you create.": "熟悉的接口，喜欢的模型。让噜噜陪你，把好点子变成现实。",
+    "One place to connect": "一处连接",
+    "Connect your favorite AI models through a unified API.": "用统一的接口，连接你常用的 AI 模型。",
+    "Understand every expense": "花费清楚",
+    "Track usage and costs for each request in your dashboard.": "每次调用的消耗，都在控制台里看得见。",
+    "Start at your own pace": "轻松开始",
+    "Create an API key, choose a model, and start your next project.": "创建令牌，选择模型，开始你的下一次创作。",
+    "Features": "功能特色",
+    "A little calm, a lot of possibility": "慢慢来，灵感总会来。",
+    "Take it easy. Let AI help with the rest.": "放轻松，剩下的交给 AI。",
+    "One API for your ideas. Lulu is ready to create with you.": "一个接口，连接你的灵感与更多可能。噜噜已准备好，陪你开始今天的创作。",
+    "Back to home": "返回首页",
+    "Sign in and pick up where you left off.": "登录账号，继续你的创作。",
+    "Your next idea starts here.": "从这里开始，和噜噜一起把灵感变成现实。"
   }
 }

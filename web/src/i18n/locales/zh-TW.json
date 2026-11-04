@@ -4639,6 +4639,7 @@
     "Perplexity": "Perplexity",
     "Persist your data file": "持久化您的數據檔案",
     "Personal": "個人",
+    "Personal Center": "個人中心",
     "Personal area": "個人中心",
     "Personal Center Area": "個人中心區域",
     "Personal info settings": "個人資訊設定",
@@ -7358,6 +7359,22 @@
     "Zhipu": "智譜",
     "Zhipu GLM": "智譜GLM",
     "Zhipu V4": "智譜 V4",
-    "Zoom": "縮放"
+    "Zoom": "縮放",
+    "Welcome to Lulu API": "歡迎來到嚕家",
+    "Give your ideas room to grow.": "讓靈感自在發生。",
+    "Familiar APIs, your favorite models. Let Lulu keep you company while you create.": "熟悉的介面，喜歡的模型。讓嚕嚕陪你，把好點子變成現實。",
+    "One place to connect": "一處連接",
+    "Connect your favorite AI models through a unified API.": "用統一的介面，連接你常用的 AI 模型。",
+    "Understand every expense": "花費清楚",
+    "Track usage and costs for each request in your dashboard.": "每次呼叫的消耗，都在控制台裡看得見。",
+    "Start at your own pace": "輕鬆開始",
+    "Create an API key, choose a model, and start your next project.": "建立權杖，選擇模型，開始你的下一次創作。",
+    "Features": "功能特色",
+    "A little calm, a lot of possibility": "慢慢來，靈感總會來。",
+    "Take it easy. Let AI help with the rest.": "放輕鬆，剩下的交給 AI。",
+    "One API for your ideas. Lulu is ready to create with you.": "一個介面，連接你的靈感與更多可能。嚕嚕已準備好，陪你開始今天的創作。",
+    "Back to home": "返回首頁",
+    "Sign in and pick up where you left off.": "登入帳號，繼續你的創作。",
+    "Your next idea starts here.": "從這裡開始，和嚕嚕一起把靈感變成現實。"
   }
 }

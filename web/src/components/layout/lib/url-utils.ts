@@ -59,6 +59,7 @@ export function checkIsActive(
   item: NavItem,
   mainNav = false
 ): boolean {
+  href = href.split('#')[0]
   const hrefWithoutQuery = href.split('?')[0]
 
   if (item.activeUrls?.some((url) => urlToString(url) === hrefWithoutQuery)) {
@@ -87,8 +88,9 @@ export function checkIsActive(
         }
         return false
       })
-    )
+    ) {
       return true
+    }
   }
 
   // For regular link items, check the item's URL

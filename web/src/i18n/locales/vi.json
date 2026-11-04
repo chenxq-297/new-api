@@ -4639,6 +4639,7 @@
     "Perplexity": "Sự bối rối",
     "Persist your data file": "Lưu trữ tệp dữ liệu của bạn",
     "Personal": "Cá nhân",
+    "Personal Center": "Trung tâm cá nhân",
     "Personal area": "Khu vực cá nhân",
     "Personal Center Area": "Khu vực cá nhân",
     "Personal info settings": "Cài đặt thông tin cá nhân",
@@ -7358,6 +7359,22 @@
     "Zhipu": "Zhipu",
     "Zhipu GLM": "Zhipu GLM",
     "Zhipu V4": "Zhipu V4",
-    "Zoom": "Zoom"
+    "Zoom": "Zoom",
+    "Welcome to Lulu API": "Chào mừng đến với Lulu API",
+    "Give your ideas room to grow.": "Để ý tưởng tự do phát triển.",
+    "Familiar APIs, your favorite models. Let Lulu keep you company while you create.": "API quen thuộc, mô hình yêu thích. Cùng Lulu biến ý tưởng thành hiện thực.",
+    "One place to connect": "Kết nối tại một nơi",
+    "Connect your favorite AI models through a unified API.": "Kết nối các mô hình AI yêu thích qua một API thống nhất.",
+    "Understand every expense": "Nắm rõ mọi chi phí",
+    "Track usage and costs for each request in your dashboard.": "Theo dõi mức sử dụng và chi phí từng yêu cầu trên bảng điều khiển.",
+    "Start at your own pace": "Bắt đầu theo nhịp của bạn",
+    "Create an API key, choose a model, and start your next project.": "Tạo khóa API, chọn mô hình và bắt đầu dự án tiếp theo.",
+    "Features": "Tính năng",
+    "A little calm, a lot of possibility": "Một chút thư thái, nhiều điều có thể.",
+    "Take it easy. Let AI help with the rest.": "Thư giãn nào. Để AI giúp bạn phần còn lại.",
+    "One API for your ideas. Lulu is ready to create with you.": "Một API cho mọi ý tưởng. Lulu sẵn sàng sáng tạo cùng bạn.",
+    "Back to home": "Về trang chủ",
+    "Sign in and pick up where you left off.": "Đăng nhập và tiếp tục công việc của bạn.",
+    "Your next idea starts here.": "Ý tưởng tiếp theo của bạn bắt đầu tại đây."
   }
 }
