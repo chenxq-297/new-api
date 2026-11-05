@@ -69,7 +69,12 @@ import {
   resolveTaskPreviewMode,
   shouldLoadTaskArtifacts,
 } from '../lib/task-artifacts'
-import type { TaskArtifact, TaskArtifactType, TaskLog } from '../types'
+import type {
+  TaskArtifact,
+  TaskArtifactType,
+  TaskArtifactProjection,
+  TaskLog,
+} from '../types'
 import { AudioPreviewDialog } from './dialogs/audio-preview-dialog'
 
 function artifactIcon(type: TaskArtifactType) {
@@ -395,6 +400,26 @@ function LegacyTaskArtifacts(props: { legacyContentUrl?: string }) {
     return <LegacyVideoMedia contentUrl={props.legacyContentUrl} />
   }
   return <EmptyTaskArtifacts />
+}
+
+export function TaskResultPreview(props: { result: TaskArtifactProjection }) {
+  if (props.result.artifacts.length === 0) {
+    return (
+      <LegacyTaskArtifacts legacyContentUrl={props.result.legacyContentUrl} />
+    )
+  }
+  return (
+    <div
+      className={cn(
+        'grid gap-3',
+        props.result.artifacts.length > 1 && 'lg:grid-cols-2'
+      )}
+    >
+      {props.result.artifacts.map((artifact) => (
+        <TaskArtifactCard key={artifact.key} artifact={artifact} />
+      ))}
+    </div>
+  )
 }
 
 export function TaskArtifactsCell(props: { log: TaskLog }) {

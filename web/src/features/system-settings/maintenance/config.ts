@@ -62,6 +62,8 @@ export const SIDEBAR_MODULES_DEFAULT: SidebarModulesAdminConfig = {
   console: {
     enabled: true,
     detail: true,
+    image_generation: true,
+    video_generation: true,
     token: true,
     log: true,
     audit: true,

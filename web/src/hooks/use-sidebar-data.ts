@@ -22,6 +22,7 @@ import {
   ClipboardList,
   CreditCard,
   FileText,
+  ImagePlus,
   Key,
   LayoutDashboard,
   ListTodo,
@@ -32,6 +33,7 @@ import {
   Ticket,
   User,
   Users,
+  Video,
 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
@@ -62,6 +64,16 @@ export function useSidebarData(): SidebarData {
             title: t('Dashboard'),
             url: '/dashboard/models',
             icon: LayoutDashboard,
+          },
+          {
+            title: t('Image Generation'),
+            url: '/generate/images',
+            icon: ImagePlus,
+          },
+          {
+            title: t('Video Generation'),
+            url: '/generate/videos',
+            icon: Video,
           },
           {
             title: t('API Keys'),

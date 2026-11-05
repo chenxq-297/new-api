@@ -102,6 +102,14 @@ export function SidebarModulesSection({
         title: t('Dashboard'),
         description: t('Aggregated usage metrics and trend charts.'),
       },
+      image_generation: {
+        title: t('Image Generation'),
+        description: t('Create images from a text prompt.'),
+      },
+      video_generation: {
+        title: t('Video Generation'),
+        description: t('Create videos and follow their progress.'),
+      },
       token: {
         title: t('Token management'),
         description: t('Create, revoke, and audit API tokens.'),

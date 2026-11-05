@@ -68,6 +68,16 @@ export function SidebarModulesCard() {
           description: t('System data statistics'),
         },
         {
+          key: 'image_generation',
+          title: t('Image Generation'),
+          description: t('Create images from a text prompt.'),
+        },
+        {
+          key: 'video_generation',
+          title: t('Video Generation'),
+          description: t('Create videos and follow their progress.'),
+        },
+        {
           key: 'token',
           title: t('Token Management'),
           description: t('API token management'),

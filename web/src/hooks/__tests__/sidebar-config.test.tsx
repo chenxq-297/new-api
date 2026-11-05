@@ -170,6 +170,69 @@ describe('personal center sidebar visibility', () => {
   })
 })
 
+describe('creation sidebar entries', () => {
+  it('adds separate image and video entries to legacy configurations', () => {
+    const { result } = sidebarFor(
+      { console: { enabled: true, detail: true } },
+      { console: { enabled: true, detail: true } }
+    )
+    const entries = result.current.flatMap((group) => group.items)
+    expect(entries).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          title: 'Image Generation',
+          url: '/generate/images',
+        }),
+        expect.objectContaining({
+          title: 'Video Generation',
+          url: '/generate/videos',
+        }),
+      ])
+    )
+    expect(
+      entries.some(
+        (item) => item.title === 'Playground' || item.title === 'Chat'
+      )
+    ).toBe(false)
+    expect(
+      entries.filter((item) =>
+        checkIsActive('/generate/videos?task=task_1', item)
+      )
+    ).toEqual([expect.objectContaining({ title: 'Video Generation' })])
+  })
+
+  it.each(['image_generation', 'video_generation'])(
+    'preserves the independent %s visibility setting',
+    (module) => {
+      const config = parseSidebarModulesAdmin('{"console":{"enabled":true}}')
+      expect(config.console[module]).toBe(true)
+      config.console[module] = false
+      const saved = parseSidebarModulesAdmin(
+        serializeSidebarModulesAdmin(config)
+      )
+      const { result } = sidebarFor(saved)
+      const titles = result.current
+        .flatMap((group) => group.items)
+        .map((item) => item.title)
+      expect(titles).not.toContain(
+        module === 'image_generation' ? 'Image Generation' : 'Video Generation'
+      )
+      expect(titles).toContain(
+        module === 'image_generation' ? 'Video Generation' : 'Image Generation'
+      )
+    }
+  )
+
+  it('hides generation pages when the console section is disabled', () => {
+    const { result } = sidebarFor({ console: { enabled: false } })
+    const titles = result.current
+      .flatMap((group) => group.items)
+      .map((item) => item.title)
+    expect(titles).not.toContain('Image Generation')
+    expect(titles).not.toContain('Video Generation')
+  })
+})
+
 describe('audit log sidebar entry', () => {
   it('admin settings default Audit Logs to visible and preserve its independent toggle when saved', () => {
     const config = parseSidebarModulesAdmin(
